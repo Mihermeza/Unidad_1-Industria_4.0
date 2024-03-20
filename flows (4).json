@@ -1,0 +1,233 @@
+[
+    {
+        "id": "c275c19a.c69ee",
+        "type": "tab",
+        "label": "EJERCICIO01",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "a3dbeb84.5f3b48",
+        "type": "comment",
+        "z": "c275c19a.c69ee",
+        "name": "Publico cada segundo en el dashboard la hora",
+        "info": "",
+        "x": 350,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "f9400a55.6a37e8",
+        "type": "inject",
+        "z": "c275c19a.c69ee",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 200,
+        "wires": [
+            [
+                "3278a2aa.fa2e6e",
+                "300c8b9a.8020e4",
+                "4d7e5964.4d6678",
+                "6fc2a1fc59671392"
+            ]
+        ]
+    },
+    {
+        "id": "3278a2aa.fa2e6e",
+        "type": "ui_text",
+        "z": "c275c19a.c69ee",
+        "group": "6288fa93.4df404",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "EPOCH",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 600,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "35a82fd4.98dfe",
+        "type": "debug",
+        "z": "c275c19a.c69ee",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "58699b11.b48944",
+        "type": "ui_text",
+        "z": "c275c19a.c69ee",
+        "group": "6288fa93.4df404",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Completo",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 740,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "a6ee6fe7.91458",
+        "type": "comment",
+        "z": "c275c19a.c69ee",
+        "name": "Publico el día y solo lo mando cuando cambie",
+        "info": "",
+        "x": 550,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "76a860be.71f43",
+        "type": "comment",
+        "z": "c275c19a.c69ee",
+        "name": "Muestro la fecha en formato claro",
+        "info": "",
+        "x": 510,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "4d7e5964.4d6678",
+        "type": "debug",
+        "z": "c275c19a.c69ee",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "300c8b9a.8020e4",
+        "type": "moment",
+        "z": "c275c19a.c69ee",
+        "name": "",
+        "topic": "",
+        "input": "",
+        "inputType": "msg",
+        "inTz": "Africa/Abidjan",
+        "adjAmount": "7",
+        "adjType": "hours",
+        "adjDir": "subtract",
+        "format": "LLL",
+        "locale": "es-ES",
+        "output": "",
+        "outputType": "msg",
+        "outTz": "Europe/Madrid",
+        "x": 460,
+        "y": 420,
+        "wires": [
+            [
+                "58699b11.b48944",
+                "35a82fd4.98dfe"
+            ]
+        ]
+    },
+    {
+        "id": "68a3cb13d3a5fcd8",
+        "type": "ui_text",
+        "z": "c275c19a.c69ee",
+        "group": "6288fa93.4df404",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Fecha",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 670,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "6fc2a1fc59671392",
+        "type": "function",
+        "z": "c275c19a.c69ee",
+        "name": "fecha",
+        "func": "const date = new Date(msg.payload);\nconst [month, day, year] = [\n  date.getMonth(),\n  date.getDate(),\n  date.getFullYear(),\n];\nmsg.payload = String(`${day}/${month + 1}/${year}`);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "68a3cb13d3a5fcd8"
+            ]
+        ]
+    },
+    {
+        "id": "6288fa93.4df404",
+        "type": "ui_group",
+        "name": "Práctica 1",
+        "tab": "1a9723300ff1c257",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1a9723300ff1c257",
+        "type": "ui_tab",
+        "name": "U1P1",
+        "icon": "query_builder",
+        "order": 7,
+        "disabled": false,
+        "hidden": false
+    }
+]

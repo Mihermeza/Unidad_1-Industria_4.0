@@ -1,0 +1,807 @@
+[
+    {
+        "id": "16773e1ad30e5677",
+        "type": "tab",
+        "label": "U1P4",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3edd9e5a219512e2",
+        "type": "mqtt in",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "topic": "/feeds/temperature",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "958ad0bb.31953",
+        "nl": false,
+        "rap": false,
+        "inputs": 0,
+        "x": 130,
+        "y": 140,
+        "wires": [
+            [
+                "0c429e5d76b4f5de",
+                "3595de522c79810c",
+                "067d858f42add0a7"
+            ]
+        ]
+    },
+    {
+        "id": "0c429e5d76b4f5de",
+        "type": "debug",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "3595de522c79810c",
+        "type": "ui_gauge",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "group": "891c4b54b9404d02",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura actual",
+        "label": "°C",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "40",
+        "colors": [
+            "#006eb3",
+            "#00e600",
+            "#d72114"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 740,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "067d858f42add0a7",
+        "type": "switch",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gt",
+                "v": "MAX",
+                "vt": "flow"
+            },
+            {
+                "t": "lt",
+                "v": "MIN",
+                "vt": "flow"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 3,
+        "x": 130,
+        "y": 300,
+        "wires": [
+            [
+                "abdfaba0d8835a1f"
+            ],
+            [
+                "faa0d30903d4555a"
+            ],
+            [
+                "3787fe040be0eb0d"
+            ]
+        ]
+    },
+    {
+        "id": "42577af9ae713c24",
+        "type": "ui_text",
+        "z": "16773e1ad30e5677",
+        "group": "891c4b54b9404d02",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Confort",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 760,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "abdfaba0d8835a1f",
+        "type": "change",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Hace Calor",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "icon",
+                "pt": "msg",
+                "to": "<i class=\"fa fa-warning fa-2x nr-dashboard-warning\"></i>",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 280,
+        "wires": [
+            [
+                "2caaada626d416ec"
+            ]
+        ]
+    },
+    {
+        "id": "a58c86a472ccde3f",
+        "type": "e-mail",
+        "z": "16773e1ad30e5677",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": false,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "mihermeza@gmail.com",
+        "dname": "",
+        "x": 710,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "ba903a432e0ba6d0",
+        "type": "debug",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "faa0d30903d4555a",
+        "type": "change",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Hace Frio",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "icon",
+                "pt": "msg",
+                "to": "<i class=\"fa fa-exclamation-circle fa-2x nr-dashboard-error\"></i>",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "2caaada626d416ec"
+            ]
+        ]
+    },
+    {
+        "id": "3787fe040be0eb0d",
+        "type": "change",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Todo OK",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "icon",
+                "pt": "msg",
+                "to": "<i class=\"fa fa-lightbulb-o fa-2x nr-dashboard-ok\"></i>",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 340,
+        "y": 360,
+        "wires": [
+            [
+                "2caaada626d416ec"
+            ]
+        ]
+    },
+    {
+        "id": "2caaada626d416ec",
+        "type": "rbe",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "property": "payload",
+        "x": 550,
+        "y": 320,
+        "wires": [
+            [
+                "42577af9ae713c24",
+                "ba903a432e0ba6d0",
+                "a58c86a472ccde3f",
+                "891d554b349afe5d"
+            ]
+        ]
+    },
+    {
+        "id": "23aecf702d2a80a5",
+        "type": "ui_slider",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "label": "MAX",
+        "tooltip": "",
+        "group": "3ccb2ccfe5f5b203",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "",
+        "topicType": "str",
+        "min": 0,
+        "max": "40",
+        "step": 1,
+        "className": "",
+        "x": 130,
+        "y": 540,
+        "wires": [
+            [
+                "d6dd25de641a0c4a"
+            ]
+        ]
+    },
+    {
+        "id": "420783f065afe399",
+        "type": "ui_slider",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "label": "MIN",
+        "tooltip": "",
+        "group": "3ccb2ccfe5f5b203",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "end",
+        "topic": "",
+        "topicType": "str",
+        "min": 0,
+        "max": "40",
+        "step": 1,
+        "className": "",
+        "x": 130,
+        "y": 620,
+        "wires": [
+            [
+                "5e067f8061b9bfaf"
+            ]
+        ]
+    },
+    {
+        "id": "8b01e8f2eb564f1c",
+        "type": "change",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "MAX",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 540,
+        "wires": [
+            [
+                "6be48bae370a313c"
+            ]
+        ]
+    },
+    {
+        "id": "79056b1db1f0bb37",
+        "type": "change",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "MIN",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 620,
+        "wires": [
+            [
+                "6be48bae370a313c"
+            ]
+        ]
+    },
+    {
+        "id": "6be48bae370a313c",
+        "type": "change",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "rules": [
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            },
+            {
+                "t": "set",
+                "p": "ui_control.seg1",
+                "pt": "msg",
+                "to": "MIN",
+                "tot": "flow"
+            },
+            {
+                "t": "set",
+                "p": "ui_control.seg2",
+                "pt": "msg",
+                "to": "MAX",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 680,
+        "y": 580,
+        "wires": [
+            [
+                "3595de522c79810c",
+                "2a4b89ae3bde29b4"
+            ]
+        ]
+    },
+    {
+        "id": "2a4b89ae3bde29b4",
+        "type": "debug",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "891d554b349afe5d",
+        "type": "ui_text",
+        "z": "16773e1ad30e5677",
+        "group": "891c4b54b9404d02",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Icono",
+        "format": "{{msg.icon}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": "",
+        "color": "#000000",
+        "x": 750,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "d6dd25de641a0c4a",
+        "type": "switch",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "lte",
+                "v": "MIN",
+                "vt": "flow"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 290,
+        "y": 540,
+        "wires": [
+            [
+                "81194d353ee025d2",
+                "994f0ac0ba774888"
+            ],
+            [
+                "8b01e8f2eb564f1c"
+            ]
+        ]
+    },
+    {
+        "id": "4bce5d3151ca2622",
+        "type": "ui_toast",
+        "z": "16773e1ad30e5677",
+        "position": "dialog",
+        "displayTime": "",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 650,
+        "y": 500,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "81194d353ee025d2",
+        "type": "change",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "El valor MAX debe ser mayor que MIN",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 500,
+        "wires": [
+            [
+                "4bce5d3151ca2622"
+            ]
+        ]
+    },
+    {
+        "id": "5e067f8061b9bfaf",
+        "type": "switch",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "gte",
+                "v": "MAX",
+                "vt": "flow"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 290,
+        "y": 620,
+        "wires": [
+            [
+                "27875658b77f96cb",
+                "418e1e3a93027b8f"
+            ],
+            [
+                "79056b1db1f0bb37"
+            ]
+        ]
+    },
+    {
+        "id": "27875658b77f96cb",
+        "type": "change",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "El valor MIN debe ser menor que MAX",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 680,
+        "wires": [
+            [
+                "b8eb35430a1169b6"
+            ]
+        ]
+    },
+    {
+        "id": "b8eb35430a1169b6",
+        "type": "ui_toast",
+        "z": "16773e1ad30e5677",
+        "position": "dialog",
+        "displayTime": "",
+        "highlight": "",
+        "sendall": true,
+        "outputs": 1,
+        "ok": "OK",
+        "cancel": "Cancel",
+        "raw": false,
+        "className": "",
+        "topic": "",
+        "name": "",
+        "x": 670,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "418e1e3a93027b8f",
+        "type": "change",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "MIN",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 480,
+        "y": 720,
+        "wires": [
+            [
+                "1bc8f290cc4c6652"
+            ]
+        ]
+    },
+    {
+        "id": "cbbc52872b886e21",
+        "type": "link in",
+        "z": "16773e1ad30e5677",
+        "name": "MIN",
+        "links": [
+            "1bc8f290cc4c6652"
+        ],
+        "x": 35,
+        "y": 620,
+        "wires": [
+            [
+                "420783f065afe399"
+            ]
+        ]
+    },
+    {
+        "id": "1bc8f290cc4c6652",
+        "type": "link out",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "links": [
+            "cbbc52872b886e21"
+        ],
+        "x": 615,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "c65fe092208d7dc4",
+        "type": "link in",
+        "z": "16773e1ad30e5677",
+        "name": "MAX",
+        "links": [
+            "d1a46b3bc86605ab"
+        ],
+        "x": 35,
+        "y": 540,
+        "wires": [
+            [
+                "23aecf702d2a80a5"
+            ]
+        ]
+    },
+    {
+        "id": "d1a46b3bc86605ab",
+        "type": "link out",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "links": [
+            "c65fe092208d7dc4"
+        ],
+        "x": 555,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "994f0ac0ba774888",
+        "type": "change",
+        "z": "16773e1ad30e5677",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "MAX",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 460,
+        "wires": [
+            [
+                "d1a46b3bc86605ab"
+            ]
+        ]
+    },
+    {
+        "id": "958ad0bb.31953",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "192.168.0.10",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "891c4b54b9404d02",
+        "type": "ui_group",
+        "name": "Temperatura",
+        "tab": "e448ec0.97b3318",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "3ccb2ccfe5f5b203",
+        "type": "ui_group",
+        "name": "Configuración",
+        "tab": "e448ec0.97b3318",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "e448ec0.97b3318",
+        "type": "ui_tab",
+        "name": "U1P4",
+        "icon": "fa-thermometer-full",
+        "order": 9,
+        "disabled": false,
+        "hidden": false
+    }
+]

@@ -1,0 +1,275 @@
+[
+    {
+        "id": "677a0e742e5f52b7",
+        "type": "tab",
+        "label": "U1P7",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "0d4525121422d17f",
+        "type": "ui_form",
+        "z": "677a0e742e5f52b7",
+        "name": "",
+        "label": "",
+        "group": "1220ec2.1cd4114",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Destinatario",
+                "value": "Destinatario",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Subject",
+                "value": "Subject",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Contenido",
+                "value": "Contenido",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "Destinatario": "",
+            "Subject": "",
+            "Contenido": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "topicType": "str",
+        "splitLayout": false,
+        "className": "",
+        "x": 270,
+        "y": 180,
+        "wires": [
+            [
+                "7d673f5a7e4760fa",
+                "5b5d7d37fd6cc294",
+                "7e599fafa9fdb7b8"
+            ]
+        ]
+    },
+    {
+        "id": "4ecceddbed5dfadb",
+        "type": "e-mail",
+        "z": "677a0e742e5f52b7",
+        "server": "smtp.gmail.com",
+        "port": "465",
+        "authtype": "BASIC",
+        "saslformat": false,
+        "token": "oauth2Response.access_token",
+        "secure": true,
+        "tls": true,
+        "name": "",
+        "dname": "Enviar email",
+        "x": 690,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "7d673f5a7e4760fa",
+        "type": "function",
+        "z": "677a0e742e5f52b7",
+        "name": "Construye email",
+        "func": "let mensaje;\nlet destinatario;\nlet asunto;\nmensaje = msg.payload.Contenido;\ndestinatario = msg.payload.Destinatario;\nasunto = msg.payload.Subject;\n\nmsg = {\n    payload: \"Enviado desde node-red: \"+ mensaje,\n    to: destinatario,\n    topic: asunto\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 180,
+        "wires": [
+            [
+                "4ecceddbed5dfadb",
+                "5b5d7d37fd6cc294"
+            ]
+        ]
+    },
+    {
+        "id": "5b5d7d37fd6cc294",
+        "type": "debug",
+        "z": "677a0e742e5f52b7",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "7e599fafa9fdb7b8",
+        "type": "function",
+        "z": "677a0e742e5f52b7",
+        "name": "clear form",
+        "func": "let mensaje;\nlet destinatario;\nlet asunto;\nmensaje = msg.payload.Contenido;\ndestinatario = msg.payload.Destinatario;\nasunto = msg.payload.Subject;\n\nmsg.payload = {\n    Contenido: \"\",\n    Destinatario: \"\",\n    Subject: \"\"\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 300,
+        "wires": [
+            [
+                "0d4525121422d17f"
+            ]
+        ]
+    },
+    {
+        "id": "1dfd50001c2e0108",
+        "type": "ui_form",
+        "z": "677a0e742e5f52b7",
+        "name": "",
+        "label": "",
+        "group": "b3747e83.b71dd",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "options": [
+            {
+                "label": "Número Destinatario",
+                "value": "Destinatario",
+                "type": "text",
+                "required": true,
+                "rows": null
+            },
+            {
+                "label": "Texto",
+                "value": "Texto",
+                "type": "text",
+                "required": true,
+                "rows": null
+            }
+        ],
+        "formValue": {
+            "Destinatario": "",
+            "Texto": ""
+        },
+        "payload": "",
+        "submit": "submit",
+        "cancel": "cancel",
+        "topic": "",
+        "topicType": "str",
+        "splitLayout": false,
+        "className": "",
+        "x": 250,
+        "y": 420,
+        "wires": [
+            [
+                "72ba9b2729688d19",
+                "4c9de4886293f27c"
+            ]
+        ]
+    },
+    {
+        "id": "72ba9b2729688d19",
+        "type": "function",
+        "z": "677a0e742e5f52b7",
+        "name": "clear form",
+        "func": "let mensaje;\nlet destinatario;\nmensaje = msg.payload.Texto;\ndestinatario = msg.payload.Destinatario;\n\nmsg.payload = {\n    Texto: \"\",\n    Destinatario: \"\",\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 240,
+        "y": 520,
+        "wires": [
+            [
+                "1dfd50001c2e0108"
+            ]
+        ]
+    },
+    {
+        "id": "4c9de4886293f27c",
+        "type": "function",
+        "z": "677a0e742e5f52b7",
+        "name": "Construye SMS",
+        "func": "let mensaje = msg.payload.Texto;\nlet destinatario = msg.payload.Destinatario;\n\nmsg = {\n    payload: mensaje,\n    topic: destinatario\n}\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 440,
+        "wires": [
+            [
+                "d7360ec8700bcb06"
+            ]
+        ]
+    },
+    {
+        "id": "d7360ec8700bcb06",
+        "type": "twilio out",
+        "z": "677a0e742e5f52b7",
+        "twilio": "ceed2c0f0bf1e702",
+        "twilioType": "sms",
+        "url": "",
+        "number": "",
+        "name": "Manda SMS",
+        "x": 630,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "1220ec2.1cd4114",
+        "type": "ui_group",
+        "name": "Manda Correo",
+        "tab": "fdbd3f26.fb77",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b3747e83.b71dd",
+        "type": "ui_group",
+        "name": "Manda SMS",
+        "tab": "fdbd3f26.fb77",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "ceed2c0f0bf1e702",
+        "type": "twilio-api",
+        "name": "Mike Node-Red",
+        "sid": "AC06277473259cc0f00d2a72b45ef91f1b",
+        "from": "+19167902565"
+    },
+    {
+        "id": "fdbd3f26.fb77",
+        "type": "ui_tab",
+        "name": "U1P7",
+        "icon": "email",
+        "order": 11,
+        "disabled": false,
+        "hidden": false
+    }
+]
